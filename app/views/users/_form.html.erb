@@ -1,0 +1,13 @@
+<%= simple_form_for(@user) do |f| %>
+ 	<%= f.input :username %>
+ 	<%= f.input :email %>
+ 	<%= f.input :password %>
+ 	<%= f.input :password_confirmation %>
+	<% for role in User::ROLES %>
+	  <%= check_box_tag "user[roles][]", role, @user.roles.include?(role) %>
+	  <%=h role.humanize %><br />
+	<% end %>
+	<%= hidden_field_tag "user[roles][]", "" %>
+	<%= f.submit %>
+
+<% end %>
