@@ -5,7 +5,13 @@ class ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.xml
   def index
-    @contacts = Contact.all
+    if params[:search]!=nil && params[:search]!=''
+      @contacts = Contact.where("name like '%#{params[:search]}%'").paginate :per_page => 1, :page => params[:page], :order => 'name'
+    else
+      @contacts = nil
+      #@contacts = Contact.all
+    end
+
 
     respond_to do |format|
       format.html # index.html.erb

@@ -1,28 +1,37 @@
-<h1>Listing contacts</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Company</th>
-    <th>Address</th>
-    <th>Info</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @contacts.each do |contact| %>
-  <tr>
-    <td><%= contact.name %></td>
-    <td><%= contact.company %></td>
-    <td><%= contact.address %></td>
-    <td><%= contact.info %></td>
-    <td><%= link_to 'Show', contact %></td>
-    <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
-    <td><%= link_to 'Destroy', contact, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<%= form_tag contacts_path, :method => 'GET' do %>  
+  <%= text_field_tag :search, params[:search] %>  
+  <%= submit_tag "Search", :name => nil %>  
 <% end %>
-</table>
+
+<% if @contacts %>
+	<% print @contacts.inspect%>
+	<h1>Listing contacts</h1>
+
+	<table>
+	 <tr>
+	   <th>Name</th>
+	   <th>Company</th>
+	   <th>Address</th>
+	   <th>Info</th>
+	   <th></th>
+	   <th></th>
+	   <th></th>
+	 </tr>
+
+	<% @contacts.each do |contact| %>
+	 <tr>
+	   <td><%= contact.name %></td>
+	   <td><%= contact.company %></td>
+	   <td><%= contact.address %></td>
+	   <td><%= contact.info %></td>
+	   <td><%= link_to 'Show', contact %></td>
+	   <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
+	   <td><%= link_to 'Destroy', contact, :confirm => 'Are you sure?', :method => :delete %></td>
+	 </tr>
+	<% end %>
+	</table>
+	<%= will_paginate @contacts%>
+<% end %>
 
 <br />
 

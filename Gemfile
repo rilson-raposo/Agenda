@@ -10,7 +10,8 @@ gem 'devise'
 gem "nifty-generators"
 gem "cancan"
 gem "simple_form"
-gem "searchlogic"
+gem "will_paginate", "~> 3.0.pre2"
+gem "web-app-theme", ">= 0.6.2"
 
 # Use unicorn as the web server
 # gem 'unicorn'

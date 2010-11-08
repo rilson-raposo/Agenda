@@ -1,33 +1,13 @@
-<%= form_for(@contact) do |f| %>
-  <% if @contact.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
-
-      <ul>
-      <% @contact.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :company %><br />
-    <%= f.text_field :company %>
-  </div>
-  <div class="field">
-    <%= f.label :address %><br />
-    <%= f.text_area :address %>
-  </div>
-  <div class="field">
-    <%= f.label :info %><br />
-    <%= f.text_area :info %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<%= simple_form_for(@contact) do |f| %>
+	<%= f.input :name, :label => 'Nome' %>
+	<%= f.input :company, :label => 'Empresa'   %>
+	<%= f.input :address, :label => 'Endereço' %>
+	<%= f.input :info, :label => 'Informações Adicionais' %>
+	<div class="fields-list">
+		<%= f.simple_fields_for :phones do |builder| %>
+			<%= render 'phone_fields', :f => builder %>
+		<% end %>
+		<%= link_to_add_fields "Adicionar Telefone", f, :phones %> 
+	</div>	
+	<%= f.submit 'Gravar'%>
 <% end %>
